@@ -1,16 +1,20 @@
 using UnityEngine;
 
-public class OpenDoor : MonoBehaviour
+public class OpenDoorTrigger : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    void OnTriggerEnter(Collider other)
     {
-        
-    }
+        // check if the player walked into the trigger
+        if (other.CompareTag("Player"))
+        {
+            // get the parent object (the hut)
+            GameObject parent = transform.parent.gameObject;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+            // get the Animation component from the hut
+            Animation animation = parent.GetComponent<Animation>();
+
+            // play the "OpenDoor" animation
+            animation.Play("OpenDoor");
+        }
     }
 }
